@@ -1,0 +1,4 @@
+Pipeline as Code
+Pipeline code uses Domain specific language. It allows us to perform the test.
+Benefits : it defines in a txt file calls a jenkinfile. we can define version control.
+We can define custom logic
