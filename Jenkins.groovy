@@ -62,9 +62,37 @@ pipeline{
                    }
             }
             }
+        stage ('Deploy Build') {   //we are adding a downstream by below syntax
+            steps {
+                build job : 'name of the project that we to do after above are done'
+            }
         }
+        
+
+        stage('Deploy to prduction') {
+            steps {
+                timeout (time: 5, unit: 'DAY') //units should be in capitals
+                    input message: 'Approve PRODUCTION Deployment'
+                }
+
+                build job: 'Job name' //this will again be a downstream job in the pipeline
+            
+            }
+
+            post{
+                success{
+                    echo 'Deployment on PRODUCTION is successful'
+                }
+                failure{
+                    echo 'Deployment to PRODUCTION is Failure'
+                }
+            }
+        }
+    
 
     
 
 //Link to find how to use jenkinfile https://jenkins.io/doc/book/pipeline/jenkinsfile/ &  https://jenkins.io/doc/book/pipeline/syntax/ 
 
+SLAVE:
+It can be started by ssh.or start directly from slave machine using command line.
